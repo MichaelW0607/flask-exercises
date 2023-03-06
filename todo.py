@@ -6,8 +6,7 @@ my_todo = [
   "Go to california"
   "See a play "
 ]
-  
-  
+
 app.route("/")
 def index():
   return render_template("todo.html.jinja",todos ="My_todo")
