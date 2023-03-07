@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title> My todo list</title>
 </head>
 <body><h1>My todos before the end of the year:</h1></body>
 <ul>{%for todo in todos %}
        <li>{{todo}}</li> 
+       <li>Go to california</li>
+       <li>See a play</li>
         {% endfor %}
 </ul>
 <form>
@@ -13,5 +15,6 @@ action = "/add"
 method = "post"
 <textarea name="new_todo"></textarea>
 <input type = "submit">
+<button type="button">submit</button>
 </form>
 </html>
