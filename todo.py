@@ -20,8 +20,8 @@ connection = pymysql.connect(
 
 @app.route("/")
 def index():
-  cursor = connection.cursor
-  cursor.execute("retrieve data")
+  cursor = connection.cursor()
+  cursor.execute("SELECT")
   results = cursor.fetchall()
   return render_template("todo.html.jinja",todos ="My_todo")
 
