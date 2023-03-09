@@ -6,18 +6,27 @@
 <body><h1>My todos before the end of the year:</h1></body>
 <ul>{%for todo in todos %}
        <li>{{todo}}</li> 
-       <li style = "{% if todo ["complete"] == 1 %} color: blue {%endif%}"> 
+       <li style = "{% if todo ['complete'] == 1 %} color: blue {%endif%}"> 
        {{todo["description"]}}
        </li>
         {% endfor %}
 </ul>
-<form>
+<
 <div class="form-group mb-2">
-action = "/add"
-method = "post"
+<form
+        action = "/add"
+        method = "post"
+        >
+
 <label for = "exampleTextarea">Add Todo</label>
-<textarea name="new_todo"></textarea>
+
+
+<textarea name="new_todo">
+</textarea>
 </div>
+
+
+
 <input type = "submit">
 </form>
 </html>
