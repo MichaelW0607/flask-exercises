@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import pymysql
 import pymysql.cursors 
 
@@ -34,17 +34,13 @@ def index():
 def add ():
   new_todo = request.form["new_todo"]
 
-   
+  cursor = connection.cursor()
+  cursor.excute(f"INSERT INTO `Todos` (`description`) VALUES ('{new_todo}')")
+  return redirect("/")
 
-  cursor.execute(f"INSERT INTO `Todos`(`Description`) VALUES ('{new_todo}') ")
-
-  my_todo.append(new_todo)
-  return new_todo
-
-cursor = connection.cursor()
-
-cursor.execute("SELECT * FROM `Todos` ")
-
-result = cursor.fetchall()
-
-print(result)
+@app.route("/complte", methods = ["POST"])
+def complete():
+  todo_id = request.form["todo_id"]
+  cursor = connection.cursor()
+  cursor.excute(f"UPDATE `Todos`complete` = 1 WHERE `id` = {todo_id}")
+  return redirect("/")

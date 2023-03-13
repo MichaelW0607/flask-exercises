@@ -6,7 +6,11 @@
 <body><h1>My todos before the end of the year:</h1></body>
 <ul>{%for todo in todos %}
        <li>{{todo}}</li> 
-       <li style = "{% if todo ['complete'] == 1 %} color: blue {%endif%}"> 
+       <li style = "{% if todo ["complete"] == 1 %} color: blue {%endif%}"> 
+       <form action="/complete" method ="post"> 
+       <input name = "todo_id value = "{{todo["id"]}}>
+       <input type ="submit" value="complete">
+       </form>
        {{todo["description"]}}
        </li>
         {% endfor %}
