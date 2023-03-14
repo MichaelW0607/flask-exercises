@@ -1,8 +1,16 @@
 from flask import Flask, render_template, request, redirect
 import pymysql
 import pymysql.cursors 
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+users = {
+    "michael": generate_password_hash("hello"),
+    "anthony": generate_password_hash("bye")
+}
 
 my_todo = [
   "Go to california"
@@ -21,8 +29,7 @@ connection = pymysql.connect(
 @app.route("/")
 def index():
   cursor = connection.cursor()
-  cursor.execute("SELECT * FROM `Todos`" )
-  cursor.execute("SELECT * FROM `Todos` ORDER BY `Complete`")
+  cursor.execute("SELECT * FROM `Todos` ORDER BY `Completed`")
   results = cursor.fetchall()
   return render_template("todo.html.jinja",
   My_todo=results
@@ -38,7 +45,7 @@ def add ():
   cursor.excute(f"INSERT INTO `Todos` (`description`) VALUES ('{new_todo}')")
   return redirect("/")
 
-@app.route("/complte", methods = ["POST"])
+@app.route("/complete", methods = ["POST"])
 def complete():
   todo_id = request.form["todo_id"]
   cursor = connection.cursor()
