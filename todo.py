@@ -42,7 +42,7 @@ def add ():
   new_todo = request.form["new_todo"]
 
   cursor = connection.cursor()
-  cursor.excute(f"INSERT INTO `Todos` (`description`) VALUES ('{new_todo}')")
+  cursor.execute(f"INSERT INTO `Todos` (`description`) VALUES ('{new_todo}')")
   return redirect("/")
 
 @app.route("/complete", methods = ["POST"])
@@ -51,3 +51,14 @@ def complete():
   cursor = connection.cursor()
   cursor.excute(f"UPDATE `Todos`complete` = 1 WHERE `id` = {todo_id}")
   return redirect("/")
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and \
+            check_password_hash(users.get(username), password):
+        return username
+    
+@app.route('/')
+@auth.login_required
+def index():
+    return "Hello, {}!".format(auth.current_user())
