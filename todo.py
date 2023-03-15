@@ -31,7 +31,7 @@ def index():
   cursor = connection.cursor()
   cursor.execute("SELECT * FROM `Todos` ORDER BY `Completed`")
   results = cursor.fetchall()
-  return render_template("todo.html.jinja",
+  return render_template(".html.jinja",
   My_todo=results
   )
 
@@ -58,7 +58,3 @@ def verify_password(username, password):
             check_password_hash(users.get(username), password):
         return username
     
-@app.route('/')
-@auth.login_required
-def index():
-    return "Hello, {}!".format(auth.current_user())
