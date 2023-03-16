@@ -31,7 +31,7 @@ def index():
   cursor = connection.cursor()
   cursor.execute("SELECT * FROM `Todos` ORDER BY `Completed`")
   results = cursor.fetchall()
-  return render_template(".html.jinja",
+  return render_template("todo.html.jinja",
   My_todo=results
   )
 
